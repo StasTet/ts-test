@@ -1,0 +1,38 @@
+.cart {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+
+  .title,
+  .total {
+    text-align: center;
+    font-size: 20px;
+    background-color: #ccc;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .total {
+    text-align: right;
+    padding-right: 64px;
+  }
+
+  .header,
+  .element {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 2fr;
+    text-align: center;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #ccc;
+
+    .input,
+    .button {
+      min-width: 80px;
+    }
+  }
+
+  .header {
+    font-weight: 600
+  }
+}

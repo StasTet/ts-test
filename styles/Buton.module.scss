@@ -1,0 +1,12 @@
+.input {
+  margin-right: 8px;
+
+  &.error {
+    border-color: red;
+  }
+}
+
+.button,
+.input {
+  min-width: 80px;
+}
