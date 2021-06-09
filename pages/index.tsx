@@ -13,6 +13,7 @@ import style from '../styles/Index.module.scss'
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data)
 
+// TODO: handle errors
 export const getStaticProps: GetStaticProps = async () => {
     const names = await fetch('http://localhost:3000/api/names')
     const products = await fetch('http://localhost:3000/api/products')
@@ -39,17 +40,17 @@ export const getStaticProps: GetStaticProps = async () => {
  const Index = (props: Props) => {
     const [cart, setCart] = useState<CartElement[]>([])
 
-     useEffect(() => {
-         setCart(JSON.parse(localStorage.getItem('cart') as string))
+    //  useEffect(() => {
+    //      setCart(JSON.parse(localStorage.getItem('cart') as string))
 
-         return () => {
-             localStorage.setItem('cart', JSON.stringify(cart));
-         }
-     }, [])
+    //      return () => {
+    //          localStorage.setItem('cart', JSON.stringify(cart));
+    //      }
+    //  }, [])
 
-     useEffect(() => {
-         localStorage.setItem('cart', JSON.stringify(cart));
-     }, [cart])
+    //  useEffect(() => {
+    //      localStorage.setItem('cart', JSON.stringify(cart));
+    //  }, [cart])
 
     const { data: names } = useSWR(API.names, fetcher, {
         refreshInterval: 20000,
@@ -66,7 +67,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
     const list: ElementList[] = useMemo((): ElementList[] => prepareList(names, products), [names, products])
 
-     const handleClickAddToCart = useCallback((good, quantity) => {
+
+    // TODO: need refactoring
+    const handleClickAddToCart = useCallback((good, quantity) => {
          const copyCart: CartElement[]  = cart.slice()
          const existElementIndex: number = copyCart.findIndex((element: CartElement) => element.id === good.id)
 
@@ -90,8 +93,7 @@ export const getStaticProps: GetStaticProps = async () => {
          setCart(copyCart)
      }, [cart])
 
-
-
+    // TODO: need refactoring
      const handleClickDelete = useCallback((id: number) => {
          const copyCart: CartElement[] = cart.slice()
          const existElementIndex: number = copyCart.findIndex((element: CartElement) => element.id === id)
@@ -101,6 +103,7 @@ export const getStaticProps: GetStaticProps = async () => {
          setCart(copyCart)
      }, [cart])
 
+     // TODO: need refactoring
      const handleChangeQuantity = useCallback((event: any, id: number) => {
          const copyCart: CartElement[] = cart.slice()
          const valInput = Number(event.target.value)

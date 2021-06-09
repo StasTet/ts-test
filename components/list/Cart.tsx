@@ -18,7 +18,7 @@ export const Cart = ({ cart, handleClick, currency, handleChange }: Props) => {
         cart.forEach((el: CartElement): number => result = result + calculatePrice(el.price, currency) * el.orderQuantity)
 
         return result
-    }, [cart])
+    }, [cart, currency])
 
     const renderGoods = (_cart: CartElement[]): any => {
         return _cart?.map((element: CartElement): any => {
